@@ -60319,7 +60319,9 @@ IonicModule
     }
 
     function overscroll(val) {
-      scrollChild.style[ionic.CSS.TRANSFORM] = 'translate3d(0px, ' + val + 'px, 0px)';
+      if (scrollChild != null) {
+        scrollChild.style[ionic.CSS.TRANSFORM] = 'translate3d(0px, ' + val + 'px, 0px)';
+      }
       lastOverscroll = val;
     }
 
@@ -60337,13 +60339,17 @@ IonicModule
       // or remove it so the app can be natively scrolled
       if (enabled) {
         ionic.requestAnimationFrame(function() {
-          scrollChild.classList.add('overscroll');
+          if (scrollChild != null) {
+            scrollChild.classList.add('overscroll');
+          }
           show();
         });
 
       } else {
         ionic.requestAnimationFrame(function() {
-          scrollChild.classList.remove('overscroll');
+          if (scrollChild != null) {
+            scrollChild.classList.remove('overscroll');
+          }
           hide();
           deactivate();
         });

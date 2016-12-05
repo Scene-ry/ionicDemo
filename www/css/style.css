@@ -1,1 +1,42 @@
 /* Empty. Add your own CSS if you like */
+
+.slider {
+  /*margin-bottom: 60px;*/
+  /*height: 100%;*/
+}
+
+.slider-slides {
+  display: flex;
+  /*flex-direction: row;*/
+}
+
+.idemo-article-content img {
+  width: 100%;
+  height: auto;
+}
+
+.idemo-article-content img[src^="http://news.cnblogs.com/news/rssclick.aspx?id="] {
+  display: none;
+}
+
+.idemo-article-content p {
+  line-height: 150%;
+}
+
+.idemo-article-content ul li {
+  list-style-type: circle;
+  padding-top: 1%;
+  margin-left: 5%;
+  padding-bottom: 1%;
+}
+
+.idemo-bottom {
+  border: none;
+  height: 60px;
+  padding-top: 7px;
+}
+
+.idemo-selected {
+  color: #387ef5;
+  opacity: 1;
+}

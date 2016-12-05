@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
 
-    <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="manifest.json">
 
     <!-- un-comment this code to enable service worker
     <script>
@@ -21,7 +21,58 @@
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
-    -->
+  -->
+
+</head>
+<body ng-app="ionicDemo" ng-controller="indexCtrl">
+
+  <ion-pane>
+      <!-- <ion-header-bar class="bar-stable">
+        <h1 class="title">Ionic Blank Starter</h1>
+      </ion-header-bar> -->
+      <ion-content>
+        <ion-refresher ng-if="mainPageSlider==0" pulling-text="下拉刷新" on-refresh="refreshRssList()"></ion-refresher>
+        <ion-slide-box active-slide="mainPageSlider" on-slide-changed="slideHasChanged($index)" show-pager="false" overflow-scroll="true">
+          <ion-slide>
+
+            <ion-list>
+              <ion-item class="item item-text-wrap" ng-repeat="item in rssList">
+                <h2>{{item.title}}</h2>
+                <br>
+                <p class="idemo-article-content" ng-bind-html="item.content"></p>
+              </ion-item>
+            </ion-list>
+          </ion-slide>
+
+          <!-- <ion-slide>
+            <div class="box"><h1>YELLOW</h1></div>
+          </ion-slide> -->
+
+          <ion-slide>
+            <ion-item><h3>Settings</h3></ion-item>
+            <a class="item item-icon-left" href="#" ng-click="showSwitchRssPrompt()"><i class="icon ion-social-rss"></i>切换RSS源</a>
+
+          </ion-slide>
+        </ion-slide-box>
+      </ion-content>
+
+      <ion-bottom-bar class="idemo-bottom bar-stable tabs tabs-icon-top">
+        <a class="tab-item idemo-selected" href="#">
+          <i class="icon ion-home"></i>
+          主页
+        </a>
+
+        <!-- <a class="tab-item" href="#">
+          <i class="icon ion-star"></i>
+          收藏
+        </a> -->
+
+        <a class="tab-item" href="#">
+          <i class="icon ion-gear-a"></i>
+          设置
+        </a>
+      </ion-bottom-bar>
+    </ion-pane>
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -30,16 +81,8 @@
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
+    <script src="lib/jquery/jquery-3.1.1.min.js"></script>
     <script src="js/app.js"></script>
-  </head>
-  <body ng-app="starter">
-
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
-      </ion-header-bar>
-      <ion-content>
-      </ion-content>
-    </ion-pane>
+    <script src="js/controller/index-ctrl.js"></script>
   </body>
-</html>
+  </html>
