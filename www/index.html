@@ -34,7 +34,7 @@
       <ion-slide-box active-slide="mainPageSlider" on-slide-changed="slideHasChanged($index)" show-pager="false" overflow-scroll="true">
         <ion-slide>
           <ion-content>
-            <ion-refresher ng-if="mainPageSlider==0" pulling-text="下拉刷新" on-refresh="refreshRssList()"></ion-refresher>
+            <ion-refresher pulling-text="下拉刷新" on-refresh="refreshRssList()"></ion-refresher>
             <ion-list>
               <ion-item class="item item-text-wrap" ng-repeat="item in rssList">
                 <h2>{{item.title}}</h2>

@@ -1,4 +1,4 @@
-app.controller('indexCtrl', ['$scope', '$http', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', function($scope, $http, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+app.controller('indexCtrl', ['$scope', '$http', '$ionicSlideBoxDelegate', function($scope, $http, $ionicSlideBoxDelegate) {
 
   $scope.mainPageSlider = 0;
 
