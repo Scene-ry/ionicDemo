@@ -32,15 +32,15 @@ app.controller('indexCtrl', ['$scope', '$http', '$timeout', '$ionicSlideBoxDeleg
     });
     tabItems.eq(selectedIndex).addClass('idemo-selected');
 
-    var bottomBarHeight = parseFloat($('.idemo-bottom').css('height'));
-    var currentSlideHeight = parseFloat($('.slider-slide:eq(' + selectedIndex + ')').css('height'));
-    var windowHeight = window.screen.height - bottomBarHeight - 11;
+    // var bottomBarHeight = parseFloat($('.idemo-bottom').css('height'));
+    // var currentSlideHeight = parseFloat($('.slider-slide:eq(' + selectedIndex + ')').css('height'));
+    // var windowHeight = window.screen.height - bottomBarHeight - 11;
 
-    if (currentSlideHeight <= window.screen.height) {
-      $('.slider').css({ 'maxHeight': windowHeight + 'px', 'marginBottom': '0' });
-    } else {
-      $('.slider').css({ 'maxHeight': currentSlideHeight + 'px', 'marginBottom': '60px' });
-    }
+    // if (currentSlideHeight <= window.screen.height) {
+    //   $('.slider').css({ 'maxHeight': windowHeight + 'px', 'marginBottom': '0' });
+    // } else {
+    //   $('.slider').css({ 'maxHeight': currentSlideHeight + 'px', 'marginBottom': '60px' });
+    // }
   };
 
 

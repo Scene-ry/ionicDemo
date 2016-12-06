@@ -30,37 +30,38 @@
       <!-- <ion-header-bar class="bar-stable">
         <h1 class="title">Ionic Blank Starter</h1>
       </ion-header-bar> -->
-      <ion-content>
-        <ion-refresher ng-if="mainPageSlider==0" pulling-text="下拉刷新" on-refresh="refreshRssList()"></ion-refresher>
-        <ion-slide-box active-slide="mainPageSlider" on-slide-changed="slideHasChanged($index)" show-pager="false" overflow-scroll="true">
-          <ion-slide>
 
+      <ion-slide-box active-slide="mainPageSlider" on-slide-changed="slideHasChanged($index)" show-pager="false" overflow-scroll="true">
+        <ion-slide>
+          <ion-content>
+            <ion-refresher ng-if="mainPageSlider==0" pulling-text="下拉刷新" on-refresh="refreshRssList()"></ion-refresher>
             <ion-list>
               <ion-item class="item item-text-wrap" ng-repeat="item in rssList">
                 <h2>{{item.title}}</h2>
                 <br>
-                <p class="idemo-article-content" ng-bind-html="item.content"></p>
+                <p class="idemo-article-content" ng-bind-html="item.content.replace('src=&quot;//images', 'src=&quot;http://images')"></p>
               </ion-item>
             </ion-list>
-          </ion-slide>
+          </ion-content>
+        </ion-slide>
 
           <!-- <ion-slide>
             <div class="box"><h1>YELLOW</h1></div>
           </ion-slide> -->
 
           <ion-slide>
-            <ion-item><h3>Settings</h3></ion-item>
-            <a class="item item-icon-left" href="#" ng-click="showSwitchRssPrompt()"><i class="icon ion-social-rss"></i>切换RSS源</a>
-
+            <ion-content>
+              <ion-item><h3>Settings</h3></ion-item>
+              <a class="item item-icon-left" href="#" ng-click="showSwitchRssPrompt()"><i class="icon ion-social-rss"></i>切换RSS源</a>
+            </ion-content>
           </ion-slide>
         </ion-slide-box>
-      </ion-content>
 
-      <ion-bottom-bar class="idemo-bottom bar-stable tabs tabs-icon-top">
-        <a class="tab-item idemo-selected" href="#">
-          <i class="icon ion-home"></i>
-          主页
-        </a>
+        <ion-bottom-bar class="idemo-bottom bar-stable tabs tabs-icon-top">
+          <a class="tab-item idemo-selected" href="#">
+            <i class="icon ion-home"></i>
+            主页
+          </a>
 
         <!-- <a class="tab-item" href="#">
           <i class="icon ion-star"></i>

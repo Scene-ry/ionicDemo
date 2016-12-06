@@ -1,13 +1,13 @@
 /* Empty. Add your own CSS if you like */
 
 .slider {
-  /*margin-bottom: 60px;*/
-  /*height: 100%;*/
+  margin-bottom: 60px;
+  height: 100% !important;
 }
 
 .slider-slides {
-  display: flex;
-  /*flex-direction: row;*/
+  /*display: flex;
+  flex-direction: row;*/
 }
 
 .idemo-article-content img {
