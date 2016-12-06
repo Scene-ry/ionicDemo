@@ -1,6 +1,7 @@
-app.controller('indexCtrl', ['$scope', '$http', '$ionicSlideBoxDelegate', function($scope, $http, $ionicSlideBoxDelegate) {
+app.controller('indexCtrl', ['$scope', '$http', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', function($scope, $http, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 
   $scope.mainPageSlider = 0;
+  $scope.showGoTopButton = false;
 
   var tabItems = $('.tab-item');
 
@@ -52,6 +53,30 @@ app.controller('indexCtrl', ['$scope', '$http', '$ionicSlideBoxDelegate', functi
       window.localStorage['RssUrl'] = url;
       $scope.refreshRssList();
     }
+  };
+
+
+  // show go top button
+  $scope.showOrHideGoTop = function() {
+    var top = $ionicScrollDelegate.getScrollPosition().top;
+    if (top > 200) {
+      $scope.showGoTopButton = true;
+    } else {
+      $scope.showGoTopButton = false;
+    }
+    $scope.$apply();
+  };
+
+  // go top button
+  $scope.goToListTop = function() {
+    $ionicScrollDelegate.scrollTop();
+  };
+
+
+  // open camera to change user avatar
+  $scope.openCamera = function() {
+    // TODO
+    console.log("camera opened");
   };
 
 
