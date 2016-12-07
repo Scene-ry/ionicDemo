@@ -37,7 +37,7 @@
           <ion-refresher pulling-text="下拉刷新" on-refresh="refreshRssList()"></ion-refresher>
           <ion-list>
             <ion-item class="item item-text-wrap" ng-repeat="item in rssList">
-              <h2>{{item.title}}</h2>
+              <h2 class="idemo-article-title">{{item.title}}</h2>
               <br>
               <p class="idemo-article-content" compile="item.content | imgFilter"></p>
             </ion-item>
