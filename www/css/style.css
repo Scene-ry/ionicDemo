@@ -11,7 +11,7 @@
 }
 
 .idemo-article-title {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .idemo-article-content img {

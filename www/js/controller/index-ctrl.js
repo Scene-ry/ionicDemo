@@ -1,7 +1,6 @@
-app.controller('indexCtrl', ['$scope', '$http', '$ionicActionSheet', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', function($scope, $http, $ionicActionSheet, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+app.controller('indexCtrl', function($scope, $cordovaImagePicker, $ionicActionSheet, $ionicPopup, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 
   $scope.mainPageSlider = 0;
-  //$scope.showGoTopButton = false;
   $scope.isImageShow = true;
 
   var tabItems = $('.tab-item');
@@ -33,50 +32,56 @@ app.controller('indexCtrl', ['$scope', '$http', '$ionicActionSheet', '$ionicSlid
       $(this).removeClass('idemo-selected');
     });
     tabItems.eq(selectedIndex).addClass('idemo-selected');
-
-    // var bottomBarHeight = parseFloat($('.idemo-bottom').css('height'));
-    // var currentSlideHeight = parseFloat($('.slider-slide:eq(' + selectedIndex + ')').css('height'));
-    // var windowHeight = window.screen.height - bottomBarHeight - 11;
-
-    // if (currentSlideHeight <= window.screen.height) {
-    //   $('.slider').css({ 'maxHeight': windowHeight + 'px', 'marginBottom': '0' });
-    // } else {
-    //   $('.slider').css({ 'maxHeight': currentSlideHeight + 'px', 'marginBottom': '60px' });
-    // }
   };
 
 
   // show switch rss popup
   $scope.showSwitchRssPrompt = function() {
-    var url = prompt('输入RSS源网址:', $scope.rssUrl);
-    if (url != null && url != '') {
-      $scope.rssUrl = url;
-      window.localStorage['RssUrl'] = url;
-      $scope.refreshRssList();
-    }
+    $ionicPopup.show({
+      template: '<input type="text" ng-model="rssUrl" placeholder="Enter address...">',
+      title: '输入RSS源网址:',
+      scope: $scope,
+      buttons: [
+        { text: '取消' },
+        {
+          text: '<b>保存</b>',
+          type: 'button-positive',
+          onTap: function(e) {
+            if (!$scope.rssUrl) {
+              e.preventDefault();
+            } else {
+              return $scope.rssUrl;
+            }
+          }
+        }
+      ]
+    }).then(function(res) {
+      if (res) {
+        window.localStorage['RssUrl'] = res;
+        $scope.refreshRssList();
+      }
+    });
   };
-
-
-  // show go top button
-  // $scope.showOrHideGoTop = function() {
-  //   var top = $ionicScrollDelegate.getScrollPosition().top;
-  //   if (top > 200) {
-  //     $scope.showGoTopButton = true;
-  //   } else {
-  //     $scope.showGoTopButton = false;
-  //   }
-  //   $scope.$apply();
-  // };
-
-  // go top button
-  // $scope.goToListTop = function() {
-  //   $ionicScrollDelegate.scrollTop();
-  // };
 
 
   // open picture library
   var openPictureLib = function() {
     // TODO
+    var options = {
+      maximumImagesCount: 10,
+      width: 800,
+      height: 800,
+      quality: 80
+    };
+
+    $cordovaImagePicker.getPictures(options)
+      .then(function (results) {
+        for (var i = 0; i < results.length; i++) {
+          console.log('Image URI: ' + results[i]);
+        }
+      }, function(error) {
+        // error getting photos
+      });
     console.log("pic library opened");
   };
 
@@ -131,4 +136,4 @@ app.controller('indexCtrl', ['$scope', '$http', '$ionicActionSheet', '$ionicSlid
   // initialize list
   $scope.refreshRssList();
 
-}]);
+});
