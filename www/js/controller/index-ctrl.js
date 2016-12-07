@@ -1,7 +1,8 @@
-app.controller('indexCtrl', ['$scope', '$http', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', function($scope, $http, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+app.controller('indexCtrl', ['$scope', '$http', '$ionicActionSheet', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', function($scope, $http, $ionicActionSheet, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 
   $scope.mainPageSlider = 0;
-  $scope.showGoTopButton = false;
+  //$scope.showGoTopButton = false;
+  $scope.isImageShow = true;
 
   var tabItems = $('.tab-item');
 
@@ -57,32 +58,72 @@ app.controller('indexCtrl', ['$scope', '$http', '$ionicSlideBoxDelegate', '$ioni
 
 
   // show go top button
-  $scope.showOrHideGoTop = function() {
-    var top = $ionicScrollDelegate.getScrollPosition().top;
-    if (top > 200) {
-      $scope.showGoTopButton = true;
-    } else {
-      $scope.showGoTopButton = false;
-    }
-    $scope.$apply();
-  };
+  // $scope.showOrHideGoTop = function() {
+  //   var top = $ionicScrollDelegate.getScrollPosition().top;
+  //   if (top > 200) {
+  //     $scope.showGoTopButton = true;
+  //   } else {
+  //     $scope.showGoTopButton = false;
+  //   }
+  //   $scope.$apply();
+  // };
 
   // go top button
-  $scope.goToListTop = function() {
-    $ionicScrollDelegate.scrollTop();
+  // $scope.goToListTop = function() {
+  //   $ionicScrollDelegate.scrollTop();
+  // };
+
+
+  // open picture library
+  var openPictureLib = function() {
+    // TODO
+    console.log("pic library opened");
+  };
+
+  // open camera to change user avatar
+  var openCamera = function() {
+    // TODO
+    console.log("camera opened");
   };
 
 
-  // open camera to change user avatar
-  $scope.openCamera = function() {
-    // TODO
-    console.log("camera opened");
+  // popup to choose local pic or take photo
+  $scope.showChangeAvatarPopup = function() {
+    $ionicActionSheet.show({
+      buttons: [
+        { text: '<i class="icon ion-image"></i>本地图片' },
+        { text: '<i class="icon ion-camera"></i>拍照上传' }
+      ],
+      titleText: '修改头像',
+      buttonClicked: function(index) {
+        switch (index) {
+          case 0:
+            openPictureLib();
+            return true;
+          case 1:
+            openCamera();
+            return true;
+          default:
+            return true;
+        }
+      }
+    });
+  };
+
+
+  // show image or not
+  $scope.isImageShowChange = function() {
+    $scope.isImageShow = !$scope.isImageShow;
   };
 
 
   // switch slider when tab icon clicked
   tabItems.each(function(index) {
     $(this).click(function() {
+      if (index == 0 && $scope.mainPageSlider == 0) {
+        $ionicScrollDelegate.scrollTop();
+        return;
+      }
       $ionicSlideBoxDelegate.slide(index);
     });
   });
