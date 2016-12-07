@@ -27,93 +27,94 @@
 <body ng-app="ionicDemo" ng-controller="indexCtrl">
 
   <ion-pane>
-      <!-- <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
-      </ion-header-bar> -->
+    <!-- <ion-header-bar class="bar-stable">
+      <h1 class="title">Ionic Blank Starter</h1>
+    </ion-header-bar> -->
 
-      <ion-slide-box active-slide="mainPageSlider" on-slide-changed="slideHasChanged($index)" show-pager="false" overflow-scroll="true">
-        <ion-slide>
-          <ion-content on-scroll="showOrHideGoTop()">
-            <ion-refresher pulling-text="下拉刷新" on-refresh="refreshRssList()"></ion-refresher>
-            <ion-list>
-              <ion-item class="item item-text-wrap" ng-repeat="item in rssList">
-                <h2>{{item.title}}</h2>
-                <br>
-                <p class="idemo-article-content" compile="item.content | imgFilter"></p>
-              </ion-item>
-            </ion-list>
+    <ion-slide-box active-slide="mainPageSlider" on-slide-changed="slideHasChanged($index)" show-pager="false" overflow-scroll="true">
+      <ion-slide>
+        <ion-content on-scroll="showOrHideGoTop()">
+          <ion-refresher pulling-text="下拉刷新" on-refresh="refreshRssList()"></ion-refresher>
+          <ion-list>
+            <ion-item class="item item-text-wrap" ng-repeat="item in rssList">
+              <h2>{{item.title}}</h2>
+              <br>
+              <p class="idemo-article-content" compile="item.content | imgFilter"></p>
+            </ion-item>
+          </ion-list>
 
-            <ion-fab right bottom>
-              <button ion-fab color="danger"><ion-icon name="arrow-dropleft"></ion-icon></button>
-              <ion-fab-list>
-                <button color="primary" ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-              </ion-fab-list>
-            </ion-fab>
-          </ion-content>
+          <ion-fab right bottom>
+            <button ion-fab color="danger"><ion-icon name="arrow-dropleft"></ion-icon></button>
+            <ion-fab-list>
+              <button color="primary" ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+            </ion-fab-list>
+          </ion-fab>
+        </ion-content>
 
-          <!-- <a ng-if="showGoTopButton && mainPageSlider==0" class="idemo-fixed-button" href="#" ng-click="goToListTop()"><i class="icon ion-chevron-up"></i></a> -->
-        </ion-slide>
+        <!-- <a ng-if="showGoTopButton && mainPageSlider==0" class="idemo-fixed-button" href="#" ng-click="goToListTop()"><i class="icon ion-chevron-up"></i></a> -->
+      </ion-slide>
 
-          <!-- <ion-slide>
-            <div class="box"><h1>YELLOW</h1></div>
-          </ion-slide> -->
+      <!-- <ion-slide>
+        <div class="box"><h1>YELLOW</h1></div>
+      </ion-slide> -->
 
-          <ion-slide>
-            <ion-content>
-              <!-- <ion-item style="background-color: #bbbbbb;">
-                <h2 style="font-size: 18pt;font-weight: bold;">设置</h2>
-              </ion-item> -->
+      <ion-slide>
+        <ion-content>
+          <!-- <ion-item style="background-color: #bbbbbb;">
+            <h2 style="font-size: 18pt;font-weight: bold;">设置</h2>
+          </ion-item> -->
 
-              <a class="item idemo-avatar" href="#" ng-click="showChangeAvatarPopup()">
-                <table>
-                  <tr>
-                    <td rowspan="2"><img src="img/ionic.png" alt="avatar"></td>
-                    <td class="idemo-username">User</td>
-                  </tr>
-                  <tr>
-                    <td class="idemo-desc">点击切换头像</td>
-                  </tr>
-                </table>
-              </a>
-
-              <a class="item item-icon-left" href="#" ng-click="showSwitchRssPrompt()"><i class="icon ion-social-rss"></i>切换RSS源</a>
-
-              <ion-toggle class="item item-icon-left" ng-model="isImageShow" ng-change="isImageShowChange()">
-                <i class="icon ion-image"></i>显示图片
-              </ion-toggle>
-            </ion-content>
-          </ion-slide>
-        </ion-slide-box>
-
-        <ion-bottom-bar class="idemo-bottom bar bar-stable tabs tabs-icon-top">
-          <a class="tab-item idemo-selected" href="#">
-            <i class="icon ion-home"></i>
-            主页
+          <a class="item idemo-avatar" href="#" ng-click="showChangeAvatarPopup()">
+            <table>
+              <tr>
+                <td rowspan="2"><img src="img/ionic.png" alt="avatar"></td>
+                <td class="idemo-username">User</td>
+              </tr>
+              <tr>
+                <td class="idemo-desc">点击切换头像</td>
+              </tr>
+            </table>
           </a>
 
-        <!-- <a class="tab-item" href="#">
-          <i class="icon ion-star"></i>
-          收藏
-        </a> -->
+          <a class="item item-icon-left" href="#" ng-click="showSwitchRssPrompt()"><i class="icon ion-social-rss"></i>切换RSS源</a>
 
-        <a class="tab-item" href="#">
-          <i class="icon ion-gear-a"></i>
-          设置
-        </a>
-      </ion-bottom-bar>
+          <ion-toggle class="item item-icon-left" ng-model="isImageShow" ng-change="isImageShowChange()">
+            <i class="icon ion-image"></i>显示图片
+          </ion-toggle>
+        </ion-content>
+      </ion-slide>
+    </ion-slide-box>
 
-    </ion-pane>
+    <ion-bottom-bar class="idemo-bottom bar bar-stable tabs tabs-icon-top">
+      <a class="tab-item idemo-selected" href="#">
+        <i class="icon ion-home"></i>
+        主页
+      </a>
 
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+      <!-- <a class="tab-item" href="#">
+        <i class="icon ion-star"></i>
+        收藏
+      </a> -->
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+      <a class="tab-item" href="#">
+        <i class="icon ion-gear-a"></i>
+        设置
+      </a>
+    </ion-bottom-bar>
 
-    <!-- your app's js -->
-    <script src="lib/jquery/jquery-3.1.1.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/filter/img-filter.js"></script>
-    <script src="js/controller/index-ctrl.js"></script>
-  </body>
-  </html>
+  </ion-pane>
+
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+  <script src="cordova.js"></script>
+
+  <!-- your app's js -->
+  <script src="lib/jquery/jquery-3.1.1.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/filter/img-filter.js"></script>
+  <script src="js/controller/index-ctrl.js"></script>
+</body>
+</html>
