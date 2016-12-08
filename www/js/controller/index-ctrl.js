@@ -1,29 +1,55 @@
-app.controller('indexCtrl', function($scope, $cordovaImagePicker, $ionicActionSheet, $ionicPopup, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+app.controller('indexCtrl', function($scope, $http, $cordovaCamera, $cordovaImagePicker, $ionicActionSheet, $ionicPopup, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
 
   $scope.mainPageSlider = 0;
   $scope.isImageShow = true;
 
   var tabItems = $('.tab-item');
 
+  // show error message
+  var showErrorMsg = function(msg) {
+    $ionicPopup.alert({
+      title: '错误',
+      template: msg
+    });
+  }
+
+  // remove loading panel when finished
+  var finishLoading = function() {
+    $('ion-pane').css({ 'visibility': 'visible' });
+    $('.idemo-loading-cover').removeClass('visible');
+  }
+
   // get rss test
   $scope.rssUrl = window.localStorage['RssUrl'] || 'http://feed.cnblogs.com/news/rss';
   $scope.refreshRssList = function() {
-    $.ajax({
-      type: 'GET',
-      url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=1000&callback=?&q=' + encodeURIComponent($scope.rssUrl),
-      dataType: 'json',
-      error: function() {
+    // $.ajax({
+    //   type: 'GET',
+    //   url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=1000&callback=?&q=' + encodeURIComponent($scope.rssUrl),
+    //   dataType: 'json',
+    //   error: function() {
+    //     alert("feed read failed.");
+    //   },
+    //   success: function(response) {
+    //     //console.log(response.responseData.feed.entries);
+    //     //$setTimeout(function() {}, 100000);
+    //     $scope.rssList = response.responseData.feed.entries;
+    //     $scope.$apply();
+    //   },
+    //   complete: function() {
+    //     $scope.$broadcast('scroll.refreshComplete');
+    //   }
+    // });
+
+    $http.jsonp('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20\'' + encodeURIComponent($scope.rssUrl) + '\'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK')
+      .success(function(response) {
+        $scope.rssList = response.query.results.rss.channel.item;
+      }).error(function() {
         alert("feed read failed.");
-      },
-      success: function(response) {
-        //console.log(response.responseData.feed.entries);
-        $scope.rssList = response.responseData.feed.entries;
-        $scope.$apply();
-      },
-      complete: function() {
+      }).finally(function() {
         $scope.$broadcast('scroll.refreshComplete');
-      }
-    });
+        finishLoading();
+      });
+
   };
 
   // change color of tab icon when slider slides
@@ -88,6 +114,21 @@ app.controller('indexCtrl', function($scope, $cordovaImagePicker, $ionicActionSh
   // open camera to change user avatar
   var openCamera = function() {
     // TODO
+    var options = {
+      destinationType: Camera.DestinationType.FILE_URI,
+      sourceType: Camera.PictureSourceType.CAMERA,
+    };
+
+    $cordovaCamera.getPicture(options).then(function(imageURI) {
+      var image = document.getElementById('idemo-user-avatar');
+      image.src = imageURI;
+    }, function(err) {
+      // error
+    });
+
+
+    $cordovaCamera.cleanup(); // only for FILE_URI
+
     console.log("camera opened");
   };
 
@@ -101,16 +142,21 @@ app.controller('indexCtrl', function($scope, $cordovaImagePicker, $ionicActionSh
       ],
       titleText: '修改头像',
       buttonClicked: function(index) {
-        switch (index) {
-          case 0:
-            openPictureLib();
-            return true;
-          case 1:
-            openCamera();
-            return true;
-          default:
-            return true;
+        try {
+          switch (index) {
+            case 0:
+              openPictureLib();
+              break;
+            case 1:
+              openCamera();
+              break;
+            default:
+              break;
+          }
+        } catch(e) {
+          showErrorMsg(e);
         }
+        return true;
       }
     });
   };

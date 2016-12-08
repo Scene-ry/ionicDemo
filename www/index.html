@@ -39,24 +39,14 @@
             <ion-item class="item item-text-wrap" ng-repeat="item in rssList">
               <h2 class="idemo-article-title">{{item.title}}</h2>
               <br>
-              <p class="idemo-article-content" compile="item.content | imgFilter"></p>
+              <p class="idemo-article-content" compile="item.description | imgFilter"></p>
             </ion-item>
           </ion-list>
 
-          <ion-fab right bottom>
-            <button ion-fab color="danger"><ion-icon name="arrow-dropleft"></ion-icon></button>
-            <ion-fab-list>
-              <button color="primary" ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-            </ion-fab-list>
-          </ion-fab>
         </ion-content>
 
         <!-- <a ng-if="showGoTopButton && mainPageSlider==0" class="idemo-fixed-button" href="#" ng-click="goToListTop()"><i class="icon ion-chevron-up"></i></a> -->
       </ion-slide>
-
-      <!-- <ion-slide>
-        <div class="box"><h1>YELLOW</h1></div>
-      </ion-slide> -->
 
       <ion-slide>
         <ion-content>
@@ -67,7 +57,7 @@
           <a class="item idemo-avatar" href="#" ng-click="showChangeAvatarPopup()">
             <table>
               <tr>
-                <td rowspan="2"><img src="img/ionic.png" alt="avatar"></td>
+                <td rowspan="2"><img id="idemo-user-avatar" src="img/ionic.png" alt="avatar"></td>
                 <td class="idemo-username">User</td>
               </tr>
               <tr>
@@ -103,6 +93,13 @@
     </ion-bottom-bar>
 
   </ion-pane>
+
+  <div class="backdrop visible active idemo-loading-cover"></div>
+  <div class="loading-container visible active idemo-loading-cover">
+    <div class="loading">
+      <ion-spinner></ion-spinner>
+    </div>
+  </div>
 
   <!-- ionic/angularjs js -->
   <script src="lib/ionic/js/ionic.bundle.js"></script>

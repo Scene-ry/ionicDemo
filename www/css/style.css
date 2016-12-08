@@ -1,4 +1,10 @@
-/* Empty. Add your own CSS if you like */
+ion-pane {
+  visibility: hidden;
+}
+
+ion-pane * {
+  visibility: inherit;
+}
 
 .slider {
   margin-bottom: 60px;
