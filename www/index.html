@@ -39,7 +39,7 @@
             <ion-item class="item item-text-wrap" ng-repeat="item in rssList">
               <h2 class="idemo-article-title">{{item.title}}</h2>
               <br>
-              <p class="idemo-article-content" compile="item.description | imgFilter"></p>
+              <p class="idemo-article-content" compile="item.content | imgFilter"></p>
             </ion-item>
           </ion-list>
 
@@ -57,7 +57,7 @@
           <a class="item idemo-avatar" href="#" ng-click="showChangeAvatarPopup()">
             <table>
               <tr>
-                <td rowspan="2"><img id="idemo-user-avatar" src="img/ionic.png" alt="avatar"></td>
+                <td rowspan="2"><img ng-src="{{settings.avatarSrc}}" alt="avatar"></td>
                 <td class="idemo-username">User</td>
               </tr>
               <tr>
@@ -68,7 +68,7 @@
 
           <a class="item item-icon-left" href="#" ng-click="showSwitchRssPrompt()"><i class="icon ion-social-rss"></i>切换RSS源</a>
 
-          <ion-toggle class="item item-icon-left" ng-model="isImageShow" ng-change="isImageShowChange()">
+          <ion-toggle class="item item-icon-left" ng-model="settings.isImageShow" ng-change="isImageShowChange()">
             <i class="icon ion-image"></i>显示图片
           </ion-toggle>
         </ion-content>
