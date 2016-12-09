@@ -41,21 +41,6 @@ app.controller('indexCtrl',
 
     // get rss test
     $scope.refreshRssList = function() {
-      // $.ajax({
-      //   type: 'GET',
-      //   url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=1000&callback=?&q=' + encodeURIComponent($scope.rssUrl),
-      //   dataType: 'json',
-      //   error: function() {
-      //     alert("feed read failed.");
-      //   },
-      //   success: function(response) {
-      //     $scope.rssList = response.responseData.feed.entries;
-      //     $scope.$apply();
-      //   },
-      //   complete: function() {
-      //     $scope.$broadcast('scroll.refreshComplete');
-      //   }
-      // });
       $http.jsonp('https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=1000&callback=JSON_CALLBACK&q=' + encodeURIComponent($scope.settings.rssUrl))
         .success(function(response) {
           $scope.rssList = response.responseData.feed.entries;
@@ -182,7 +167,9 @@ app.controller('indexCtrl',
       }, function(error) {
         // error
         //console.log(error);
-        showErrorMsg("openCamera", error);
+        if (error.indexOf('Camera cancelled.') == -1) {
+          showErrorMsg("openCamera", error);
+        }
       });
 
       //$cordovaCamera.cleanup(); // only for FILE_URI
@@ -210,6 +197,7 @@ app.controller('indexCtrl',
             }
           } catch(e) {
             showErrorMsg("showChangeAvatarPopup", e);
+            //throw e;
           }
           return true;
         }
