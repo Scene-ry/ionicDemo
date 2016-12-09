@@ -33,7 +33,7 @@
 
     <ion-slide-box active-slide="mainPageSlider" on-slide-changed="slideHasChanged($index)" show-pager="false" overflow-scroll="true">
       <ion-slide>
-        <ion-content on-scroll="showOrHideGoTop()">
+        <ion-content>
           <ion-refresher pulling-text="下拉刷新" on-refresh="refreshRssList()"></ion-refresher>
           <ion-list>
             <ion-item class="item item-text-wrap" ng-repeat="item in rssList">
@@ -47,6 +47,18 @@
 
         <!-- <a ng-if="showGoTopButton && mainPageSlider==0" class="idemo-fixed-button" href="#" ng-click="goToListTop()"><i class="icon ion-chevron-up"></i></a> -->
       </ion-slide>
+
+      <!-- <ion-slide>
+        <ion-content>
+          <ion-list>
+            <ion-item class="item item-text-wrap" ng-repeat="item in settings.collections">
+              <h2 class="idemo-article-title">{{item.title}}</h2>
+              <br>
+              <p class="idemo-article-content" compile="item.content | imgFilter"></p>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-slide> -->
 
       <ion-slide>
         <ion-content>
