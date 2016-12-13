@@ -124,7 +124,7 @@ app.controller('indexCtrl',
       $cordovaFile.copyFile(dirName, fileName, cordova.file.dataDirectory, 'avatar.jpg')
         .then(function(success) {
           console.log(JSON.stringify(success));
-          $scope.settings.avatarSrc = success.nativeURL;
+          $scope.settings.avatarSrc = success.nativeURL + "?rd=" + new Date().getTime();
           saveSettings();
         }, function(error) {
           showErrorMsg("copyImageAndSetAvatar", error);
@@ -136,8 +136,8 @@ app.controller('indexCtrl',
     var openPictureLib = function() {
       var options = {
         maximumImagesCount: 1,
-        width: 50,
-        height: 50,
+        width: 100,
+        height: 100,
         quality: 80
       };
 
